@@ -1,0 +1,26 @@
+const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.get("/random", (req, res) => {
+    const randomNumber = Math.floor(Math.random() * 20) + 1;
+    async function hashSHA256(message) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+// This simply handles the I/O of the Hashing function
+function asciiToSHA256(str) {
+    hashSHA256(str).then(hash => res.json({ number: hash }));
+}
+    //const shaOutput = asciiToSHA256(randomNumber);
+    //res.json({ number: shaOutput });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
+

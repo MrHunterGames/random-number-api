@@ -1,0 +1,9 @@
+{
+  "name": "random-number-api",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "crypto": "^1.0.1"
+  }
+}
+
